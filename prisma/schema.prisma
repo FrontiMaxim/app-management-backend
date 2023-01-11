@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id_user   String    @id @default(uuid())
+  name      String    @db.VarChar(52)
+  login     String    @unique @db.VarChar(14)
+  password  String
+  is_online Boolean   @default(false)
+  avatar    String
+  roles     Role[]
+  objects   Object[]
+  tasks     Task[]
+  comments  Comment[]
+  sessions  Session[]
+}
+
+model Role {
+  id_role Int    @id @default(autoincrement())
+  name    String @db.VarChar()
+  users   User[]
+}
+
+model Object {
+  id_object  String @id @default(uuid())
+  city       String
+  street     String
+  house      String
+  apartment  Int?
+  note       String
+  data_start String
+  client     String
+  users      User[]
+  tasks      Task[]
+
+  @@unique([city, street, house, note])
+  @@unique([city, street, house, apartment, note])
+}
+
+model Task {
+  id_task     String     @id @default(uuid())
+  name        String
+  deadline    String
+  description String
+  object      Object     @relation(fields: [id_object], references: [id_object])
+  id_object   String
+  user        User?      @relation(fields: [id_user], references: [id_user])
+  id_user     String?
+  status      Status     @relation(fields: [id_status], references: [id_status])
+  id_status   Int
+  comments    Comment[]
+  resources   Resource[]
+}
+
+model Status {
+  id_status Int    @id @default(autoincrement())
+  name      String
+  tasks     Task[]
+}
+
+model Comment {
+  id_comment String @id @default(uuid())
+  content    String
+  data       String
+  task       Task   @relation(fields: [id_task], references: [id_task])
+  id_task    String
+  user       User   @relation(fields: [id_user], references: [id_user])
+  id_user    String
+}
+
+model Resource {
+  id_resource String @id @default(uuid())
+  name        String
+  link        String
+  task        Task   @relation(fields: [id_task], references: [id_task])
+  id_task     String
+}
+
+model Session {
+  id_session String  @id @default(uuid())
+  date       String
+  time_start String
+  time_end   String?
+  user       User    @relation(fields: [id_user], references: [id_user])
+  id_user    String
+}
