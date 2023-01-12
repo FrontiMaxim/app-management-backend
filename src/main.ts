@@ -5,6 +5,7 @@ import userController from './user/user.controller';
 import { authorisation } from './middleware/authorisation';
 import loginController from './login/login.controller';
 import sessionController from './session/session.controller';
+import path from 'path';
 
 config();
 
@@ -14,6 +15,9 @@ const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 8080;
 const LOGIN_PATH = '/login';
 const USER_PATH = '/user';
 const SESSION_PATH = '/session';
+
+
+//app.use('/avatars', express.static(path.join(__dirname, 'public', 'avatars')));
 
 app.use(json());
 

@@ -14,17 +14,11 @@ model User {
   password  String
   is_online Boolean   @default(false)
   avatar    String
-  roles     Role[]
+  role      String    @db.VarChar(10)
   objects   Object[]
   tasks     Task[]
   comments  Comment[]
   sessions  Session[]
-}
-
-model Role {
-  id_role Int    @id @default(autoincrement())
-  name    String @db.VarChar()
-  users   User[]
 }
 
 model Object {
