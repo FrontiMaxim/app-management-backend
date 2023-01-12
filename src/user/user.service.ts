@@ -19,7 +19,7 @@ export const create = async (newUser: UserDTO): Promise<void> => {
 
 export const read = async (login: string): Promise<UserDTO | void> => {
     
-    const user = await getUser(login, true);
+    const user = await getUser(login);
 
     if(user) {
         return user;

@@ -9,9 +9,9 @@ import { NotUserError } from "../errors/notUser.error";
 const userController = Router();
 
 userController.post('/create', (req: Request, res: Response) => {
-    const {payload: { roles } } = req.body;
+    const {payload: { role } } = req.body;
 
-    if (checkRole(['ADMIN'], roles)) {
+    if (checkRole(['ADMIN'], role)) {
 
         delete req.body.payload;
 

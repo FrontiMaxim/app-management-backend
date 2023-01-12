@@ -13,7 +13,7 @@ model User {
   login     String    @unique @db.VarChar(14)
   password  String
   is_online Boolean   @default(false)
-  avatar    String
+  avatar    String?
   role      String    @db.VarChar(10)
   objects   Object[]
   tasks     Task[]

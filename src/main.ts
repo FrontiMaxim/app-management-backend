@@ -27,7 +27,7 @@ app.use(authorisation);
 
 app.use(SESSION_PATH, sessionController);
 
-// app.use(USER_PATH, userController);
+app.use(USER_PATH, userController);
 
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порте: ${PORT}`);

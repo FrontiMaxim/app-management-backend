@@ -9,7 +9,7 @@ export const login = async (body: LoginDTO): Promise<string> => {
 
     if(user) {
         if (bcrypt.compareSync(body.password, user.password)) {
-            const token = jwt.sign({login: user.login, roles: user.roles}, process.env.SECRET!);
+            const token = jwt.sign({login: user.login, role: user.role}, process.env.SECRET!);
             return token;
         } else {
             throw new LoginError();
