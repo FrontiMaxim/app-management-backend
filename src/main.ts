@@ -16,10 +16,9 @@ const LOGIN_PATH = '/login';
 const USER_PATH = '/user';
 const SESSION_PATH = '/session';
 
-
-//app.use('/avatars', express.static(path.join(__dirname, 'public', 'avatars')));
-
 app.use(json());
+
+app.use('/avatars', express.static(path.join(__dirname, 'public', 'avatars')));
 
 app.use(LOGIN_PATH, loginController);
 

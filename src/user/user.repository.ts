@@ -11,6 +11,19 @@ export const getUser = async (login: string): Promise<UserDTO | null> => {
 };
 
 
+// получение списка пользователей без пользователя, который запросил данный список
+export const getUsers = async (login: string): Promise<UserDTO[] | null> => {
+
+    return await prisma.user.findMany({
+        where: {
+            NOT: {
+                login
+            }
+        }
+    })
+}
+
+
 export const saveUser = async (user: UserDTO) => {
     return await prisma.user.create({
         data: {

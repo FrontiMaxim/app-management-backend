@@ -6,7 +6,7 @@ export class UserDTO {
     login: string;
     password: string;
     is_online?: boolean;
-    avatar?: string | null;
+    avatar: string;
     role: string;
     sessions?: SessionDTO[];
 }
