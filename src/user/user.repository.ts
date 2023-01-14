@@ -34,3 +34,46 @@ export const saveUser = async (user: UserDTO) => {
         }
     });
 };
+
+
+export const chageUser = async (user: UserDTO) => {
+
+    if (user.password !== '') {
+        await prisma.user.update({
+            where: {
+                id_user: user.id_user
+            },
+            data: {
+                password: {
+                    set: user.password
+                }
+            }   
+        });
+    }
+
+    await prisma.user.update({
+        where: {
+            id_user: user.id_user
+        },
+        data: {
+            name: {
+                set: user.name
+            },
+            login: {
+                set: user.login
+            },
+            role: {
+                set: user.role
+            }
+        }   
+    });
+};
+
+
+export const deleteUser = async (id_user: string): Promise<UserDTO> => {
+    return prisma.user.delete({
+        where: {
+            id_user
+        }
+    })
+}
