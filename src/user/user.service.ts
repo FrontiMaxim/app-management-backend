@@ -1,4 +1,4 @@
-import { chageUser, deleteUser, getUser, getUsers, saveUser } from "./user.repository";
+import { changeUser, deleteUser, getUser, getUsers, saveUser } from "./user.repository";
 import bcrypt from 'bcryptjs';
 import { UserDTO } from "./user.dto";
 import { RegistrationError } from "./errors/registration.error";
@@ -6,7 +6,7 @@ import { NotUserError } from "./errors/notUser.error";
 import { ChangeUserError } from "./errors/changeUser.error";
 import { DeleteUserError } from "./errors/deleteUser.error";
 
-export const create = async (newUser: UserDTO): Promise<void> => {
+export const create = async (newUser: UserDTO): Promise<UserDTO> => {
     const user = await getUser(newUser.login);
 
     if(user) {
@@ -16,7 +16,7 @@ export const create = async (newUser: UserDTO): Promise<void> => {
         const hashPassword: string = await bcrypt.hash(newUser.password, salt);
         newUser.password = hashPassword;
         newUser.avatar = '/avatars/avatar.png';
-        await saveUser(newUser);
+        return await saveUser(newUser);
     }
 }
 
@@ -45,7 +45,7 @@ export const readUsers = async (login: string): Promise<UserDTO[]> => {
     } 
 }
 
-export const change = async (user: UserDTO): Promise<void> => {
+export const change = async (user: UserDTO): Promise<UserDTO> => {
 
     if (user.password !== '') {
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
@@ -54,7 +54,7 @@ export const change = async (user: UserDTO): Promise<void> => {
     }
     
     try {
-        await chageUser(user);
+        return await changeUser(user);
     } catch {
         throw new ChangeUserError();
     }

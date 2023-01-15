@@ -36,7 +36,7 @@ export const saveUser = async (user: UserDTO) => {
 };
 
 
-export const chageUser = async (user: UserDTO) => {
+export const changeUser = async (user: UserDTO): Promise<UserDTO> => {
 
     if (user.password !== '') {
         await prisma.user.update({
@@ -51,7 +51,7 @@ export const chageUser = async (user: UserDTO) => {
         });
     }
 
-    await prisma.user.update({
+    return await prisma.user.update({
         where: {
             id_user: user.id_user
         },
