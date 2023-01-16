@@ -1,3 +1,4 @@
+import { ObjectDTO } from "../object/object.dto";
 import { SessionDTO } from "../session/session.dto";
 
 export class UserDTO {
@@ -9,4 +10,5 @@ export class UserDTO {
     avatar: string;
     role: string;
     sessions?: SessionDTO[];
+    objects?: ObjectDTO[];
 }

@@ -29,7 +29,10 @@ export const saveUser = async (user: UserDTO) => {
         data: {
             ...user,
             sessions: {
-                connect: user.sessions
+                connect: []
+            }, 
+            objects: {
+                connect: []
             }
         }
     });
