@@ -38,7 +38,7 @@ export const saveObject = async (object: ObjectDTO) => {
         data: {
             ...object,
             users: {
-                connect: object.users
+                connect: object.users?.map(user => ({id_user: user.id_user}))
             }
         }
     });
@@ -103,7 +103,7 @@ export const changeObject = async (object: ObjectDTO): Promise<ObjectDTO> => {
                 set: object.data_start
             },
             users: {
-                set: object.users
+                set: object.users?.map(user => ({id_user: user.id_user}))
             }
         }, 
         include: {
