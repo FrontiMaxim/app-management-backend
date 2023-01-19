@@ -58,7 +58,13 @@ export const getObjectsByIdUser = async (id_user: string): Promise<ObjectDTO[] |
             }
         }, 
         include: {
-            users: true
+            users: {
+                where: {
+                    NOT: {
+                        id_user
+                    }
+                }
+            }
         }
     });
 }

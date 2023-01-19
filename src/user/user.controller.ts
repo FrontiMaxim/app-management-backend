@@ -42,7 +42,7 @@ userController.get('/read', (req: Request, res: Response) => {
 });
 
 // изменения, которые может внести администратор
-userController.put('/change', (req: Request, res: Response) => {
+userController.put('/update', (req: Request, res: Response) => {
     
     const {payload: { role } } = req.body;
 
