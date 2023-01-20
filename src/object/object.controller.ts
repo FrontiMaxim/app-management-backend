@@ -15,7 +15,7 @@ objectController.post('/create', (req: Request, res: Response) => {
         delete req.body.payload;
 
         createObject(req.body)
-            .then(object => res.status(201).send(object))
+            .then(() => res.status(201).send())
             .catch((err: ObjectRepeatError) => res.status(400).send(err.message));
     } else {
         res.status(403).send(new RoleError().message);
@@ -45,7 +45,7 @@ objectController.put('/update', (req: Request, res: Response) => {
         delete req.body.payload;
 
         updateObject(req.body)
-            .then(object => res.status(200).send(object))
+            .then(() => res.status(200).send())
             .catch((err: ObjectUpdateError) => res.status(400).send(err.message));
     } else {
         res.status(403).send(new RoleError().message);

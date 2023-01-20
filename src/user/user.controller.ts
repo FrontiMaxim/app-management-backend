@@ -18,7 +18,7 @@ userController.post('/create', (req: Request, res: Response) => {
         delete req.body.payload;
 
         create(req.body)
-        .then((newUser) => res.status(201).send(newUser))
+        .then(() => res.status(201).send())
         .catch((err: RegistrationError) => res.status(404).send(err.message));
     } else {
         res.status(403).send(new RoleError().message);
@@ -48,7 +48,7 @@ userController.put('/update', (req: Request, res: Response) => {
 
     if (checkRole(['ADMIN'], role)) {
         change(req.body)
-        .then((changedUser) => res.status(200).send(changedUser))
+        .then(() => res.status(200).send())
         .catch((err: ChangeUserError) => res.status(400).send(err.message));
     } else {
         res.status(403).send(new RoleError().message);

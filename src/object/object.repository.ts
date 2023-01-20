@@ -32,8 +32,8 @@ export const getObjectByAlternateKeys = async (object: ObjectDTO): Promise<Objec
 };
 
 
-export const saveObject = async (object: ObjectDTO) => {
-    return await prisma.object.create({
+export const saveObject = async (object: ObjectDTO): Promise<void> => {
+    await prisma.object.create({
         data: {
             ...object,
             users: {
@@ -82,9 +82,9 @@ export const getObjectsById = async (id_object: string): Promise<ObjectDTO | nul
 }
 
 
-export const changeObject = async (object: ObjectDTO): Promise<ObjectDTO> => {
+export const changeObject = async (object: ObjectDTO): Promise<void> => {
 
-    return await prisma.object.update({
+    await prisma.object.update({
         where: {
             id_object: object.id_object
         },

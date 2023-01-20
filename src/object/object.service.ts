@@ -2,13 +2,13 @@ import { ObjectDTO } from "./object.dto";
 import { ObjectDeleteError, ObjectRepeatError, ObjectUpdateError } from "./object.errors";
 import { changeObject, getObjectByAlternateKeys, getObjectsByIdUser, removeObject, saveObject } from "./object.repository";
 
-export const createObject = async (newObject: ObjectDTO): Promise<ObjectDTO> => {
+export const createObject = async (newObject: ObjectDTO): Promise<void> => {
     const object = await getObjectByAlternateKeys(newObject);
 
     if(object) {
        throw new ObjectRepeatError();
     } else {
-       return await saveObject(newObject);
+       await saveObject(newObject);
     }
 }
 
@@ -24,10 +24,10 @@ export const readObjects = async (id_user: string): Promise<ObjectDTO[]> => {
     }
 }
 
-export const updateObject = async (changedObject: ObjectDTO): Promise<ObjectDTO> => {
+export const updateObject = async (changedObject: ObjectDTO): Promise<void> => {
 
     try {
-        return await changeObject(changedObject);
+        await changeObject(changedObject);
     } catch {
         throw new ObjectUpdateError();
     }

@@ -24,8 +24,8 @@ export const getUsers = async (login: string): Promise<UserDTO[] | null> => {
 }
 
 
-export const saveUser = async (user: UserDTO) => {
-    return await prisma.user.create({
+export const saveUser = async (user: UserDTO): Promise<void> => {
+    await prisma.user.create({
         data: {
             ...user,
             sessions: {
@@ -42,7 +42,7 @@ export const saveUser = async (user: UserDTO) => {
 };
 
 
-export const changeUser = async (user: UserDTO): Promise<UserDTO> => {
+export const changeUser = async (user: UserDTO): Promise<void> => {
 
     if (user.password !== '') {
         await prisma.user.update({
@@ -57,7 +57,7 @@ export const changeUser = async (user: UserDTO): Promise<UserDTO> => {
         });
     }
 
-    return await prisma.user.update({
+    await prisma.user.update({
         where: {
             id_user: user.id_user
         },
