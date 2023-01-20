@@ -1,4 +1,3 @@
-import { IncomingMessage } from "http";
 import prisma from "../prisma";
 import { ObjectDTO } from "./object.dto";
 
@@ -39,6 +38,9 @@ export const saveObject = async (object: ObjectDTO) => {
             ...object,
             users: {
                 connect: object.users?.map(user => ({id_user: user.id_user}))
+            },
+            tasks: {
+                connect: []
             }
         }
     });

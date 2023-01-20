@@ -33,6 +33,9 @@ export const saveUser = async (user: UserDTO) => {
             }, 
             objects: {
                 connect: []
+            }, 
+            tasks: {
+                connect: []
             }
         }
     });

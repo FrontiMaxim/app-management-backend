@@ -1,4 +1,5 @@
 import { SessionDTO } from "../session/session.dto";
+import { TaskDTO } from "../task/task.dto";
 import { UserDTO } from "../user/user.dto";
 
 export class ObjectDTO {
@@ -11,5 +12,5 @@ export class ObjectDTO {
     data_start: string;
     client: string;
     users?: UserDTO[];
-    //tasks: TaskDTO[];
+    tasks?: TaskDTO[];
 }

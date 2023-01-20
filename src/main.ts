@@ -7,6 +7,7 @@ import loginController from './login/login.controller';
 import sessionController from './session/session.controller';
 import path from 'path';
 import objectController from './object/object.controller';
+import taskController from './task/task.controller';
 
 config();
 
@@ -17,6 +18,7 @@ const LOGIN_PATH = '/login';
 const USER_PATH = '/user';
 const SESSION_PATH = '/session';
 const OBJECT_PATH = '/object';
+const TASK_PATH = '/task';
 
 app.use(json());
 
@@ -31,6 +33,8 @@ app.use(SESSION_PATH, sessionController);
 app.use(USER_PATH, userController);
 
 app.use(OBJECT_PATH, objectController);
+
+app.use(TASK_PATH, taskController);
 
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порте: ${PORT}`);
