@@ -111,6 +111,7 @@ export const getTasks = async ({id_user, id_object}: TParam): Promise<TaskDTO[] 
             include: {
                 object: true,
                 status: true,
+                user: true
             }
         });
     } else {
