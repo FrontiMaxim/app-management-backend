@@ -83,3 +83,16 @@ export const deleteUser = async (id_user: string): Promise<UserDTO> => {
         }
     })
 }
+
+
+export const getUsersByIdObject = async (id_object: string): Promise<UserDTO[]> => {
+    return prisma.user.findMany({
+        where: {
+            objects: {
+                some: {
+                    id_object
+                }
+            }
+        }
+    });
+}

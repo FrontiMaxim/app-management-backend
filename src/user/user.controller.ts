@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Request, Response } from "express";
-import { change, create, read, readUsers, remove } from "./user.service";
+import { change, create, read, readParticipants, readUsers, remove } from "./user.service";
 import { RegistrationError } from "./errors/registration.error";
 import { checkRole } from "../helpers/checkRole";
 import { RoleError } from "../errors/role.error";
@@ -68,6 +68,25 @@ userController.get('/read/users', (req: Request, res: Response) => {
     }
    
 });
+
+
+userController.get('/read/participants_object', (req: Request, res: Response) => {
+    
+    const {payload: { role, login } } = req.body;
+
+    if (checkRole(['ADMIN'], role)) {
+        const id_object = req.query.id_object;
+
+        if(id_object) {
+            readParticipants(id_object.toString())
+            .then((users) => res.status(200).send(users))
+        }
+    } else {
+        res.status(403).send(new RoleError().message);
+    }
+   
+});
+
 
 userController.delete('/delete', (req: Request, res: Response) => {
     

@@ -1,4 +1,4 @@
-import { changeUser, deleteUser, getUser, getUsers, saveUser } from "./user.repository";
+import { changeUser, deleteUser, getUser, getUsers, getUsersByIdObject, saveUser } from "./user.repository";
 import bcrypt from 'bcryptjs';
 import { UserDTO } from "./user.dto";
 import { RegistrationError } from "./errors/registration.error";
@@ -58,6 +58,11 @@ export const change = async (user: UserDTO): Promise<void> => {
     } catch {
         throw new ChangeUserError();
     }
+}
+
+
+export const readParticipants = async (id_object: string): Promise<UserDTO[]> => {
+    return await getUsersByIdObject(id_object);
 }
 
 
