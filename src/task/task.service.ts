@@ -6,7 +6,6 @@ export const createTask = async (newTask: TaskDTO): Promise<void> => {
     try {
         await saveTask(newTask);
     } catch(e){
-        console.log(e)
         throw new TaskCreateError();
     }
 }

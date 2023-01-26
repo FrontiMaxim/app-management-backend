@@ -1,5 +1,4 @@
 import prisma from "../prisma"
-import userController from "../user/user.controller";
 import { TaskDTO } from "./task.dto"
 
 export const getTaskById = async (id_task: string): Promise<TaskDTO | null> => {

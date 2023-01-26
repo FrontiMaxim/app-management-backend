@@ -69,11 +69,11 @@ model Comment {
 }
 
 model Resource {
-  id_resource String @id @default(uuid())
-  name        String
-  link        String
-  task        Task   @relation(fields: [id_task], references: [id_task])
-  id_task     String
+  id_resource  String @id @default(uuid())
+  originalName String
+  storageName  String
+  task         Task   @relation(fields: [id_task], references: [id_task])
+  id_task      String
 }
 
 model Session {
