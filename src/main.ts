@@ -9,6 +9,7 @@ import path from 'path';
 import objectController from './object/object.controller';
 import taskController from './task/task.controller';
 import resourceController from './resource/resource.controller';
+import commentController from './comment/comment.controller';
 
 config();
 
@@ -21,6 +22,7 @@ const SESSION_PATH = '/session';
 const OBJECT_PATH = '/object';
 const TASK_PATH = '/task';
 const RESOURCE_PATH = '/resource';
+const COMMENT_PATH = '/comment';
 
 app.use(json());
 
@@ -40,6 +42,8 @@ app.use(OBJECT_PATH, objectController);
 app.use(TASK_PATH, taskController);
 
 app.use(RESOURCE_PATH, resourceController);
+
+app.use(COMMENT_PATH, commentController);
 
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порте: ${PORT}`);

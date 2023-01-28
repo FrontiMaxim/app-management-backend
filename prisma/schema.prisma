@@ -62,6 +62,7 @@ model Comment {
   id_comment String @id @default(uuid())
   content    String
   data       String
+  time       String
   task       Task   @relation(fields: [id_task], references: [id_task])
   id_task    String
   user       User   @relation(fields: [id_user], references: [id_user])
