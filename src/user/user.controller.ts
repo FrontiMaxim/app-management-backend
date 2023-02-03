@@ -28,11 +28,17 @@ userController.post('/create', (req: Request, res: Response) => {
 
 userController.get('/read', (req: Request, res: Response) => {
     
-    const {payload: { role } } = req.body;
+    const {payload: { role, login } } = req.body;
 
     if (checkRole(['ADMIN', 'DESIGNER', 'CLIENT'], role)) {
-        console.log(req.params)
-        read(req.params.login)
+
+        let param: string = login;
+        
+        if(req.query.login) {
+            param = req.query.login.toString();
+        }
+
+        read(param)
         .then((user) => res.status(200).send(user))
         .catch((err: NotUserError) => res.status(404).send(err.message));
     } else {
