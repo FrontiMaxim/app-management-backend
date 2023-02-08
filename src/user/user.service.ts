@@ -15,7 +15,7 @@ export const create = async (newUser: UserDTO): Promise<void> => {
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
         const hashPassword: string = await bcrypt.hash(newUser.password, salt);
         newUser.password = hashPassword;
-        newUser.avatar = '/avatars/avatar.png';
+        newUser.avatar = 'avatar.png';
         await saveUser(newUser);
     }
 }
