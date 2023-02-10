@@ -23,7 +23,7 @@ objectController.post('/create', (req: Request, res: Response) => {
 });
 
 
-objectController.get('/read/objects', (req: Request, res: Response) => {
+objectController.get('/read/all', (req: Request, res: Response) => {
     
     delete req.body.payload;
 

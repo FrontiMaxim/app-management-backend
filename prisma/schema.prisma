@@ -42,7 +42,7 @@ model Task {
   name        String
   deadline    String
   description String
-  object      Object     @relation(fields: [id_object], references: [id_object])
+  object      Object     @relation(fields: [id_object], references: [id_object], onDelete: Cascade)
   id_object   String
   user        User?      @relation(fields: [id_user], references: [id_user])
   id_user     String?
@@ -63,7 +63,7 @@ model Comment {
   content    String
   data       String
   time       String
-  task       Task   @relation(fields: [id_task], references: [id_task])
+  task       Task   @relation(fields: [id_task], references: [id_task], onDelete: Cascade)
   id_task    String
   user       User   @relation(fields: [id_user], references: [id_user])
   id_user    String
@@ -73,7 +73,7 @@ model Resource {
   id_resource  String @id @default(uuid())
   originalName String
   storageName  String
-  task         Task   @relation(fields: [id_task], references: [id_task])
+  task         Task   @relation(fields: [id_task], references: [id_task], onDelete: Cascade)
   id_task      String
 }
 
