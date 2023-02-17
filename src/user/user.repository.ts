@@ -99,3 +99,18 @@ export const getUsersByIdObject = async (id_object: string): Promise<UserDTO[]> 
         }
     });
 }
+
+
+export const changeAvatarByLogin = async (avatar: string, login: string): Promise<void> => {
+
+    await prisma.user.update({
+        where: {
+            login
+        },
+        data: {
+            avatar: {
+                set: avatar
+            }
+        }
+    });
+}

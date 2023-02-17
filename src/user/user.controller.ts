@@ -1,14 +1,37 @@
 import { Router } from "express";
 import { Request, Response } from "express";
-import { change, create, read, readParticipants, readUsers, remove } from "./user.service";
+import { change, create, read, readParticipants, readUsers, remove, updateAvatar } from "./user.service";
 import { RegistrationError } from "./errors/registration.error";
 import { checkRole } from "../helpers/checkRole";
 import { RoleError } from "../errors/role.error";
 import { NotUserError } from "./errors/notUser.error";
 import { ChangeUserError } from "./errors/changeUser.error";
 import { DeleteUserError } from "./errors/deleteUser.error";
+import multer from "multer";
+import path from 'path';
 
 const userController = Router();
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '../',  'public', 'avatars'))
+    },
+
+    filename: function (req, file, cb) {
+        const { login } = req.query;
+
+        if(login) {
+            const extension =  file.originalname.slice(file.originalname.lastIndexOf('.'));
+            req.query.avatar = login.toString() + extension;
+           
+            cb(null, req.query.avatar);
+        }
+    },    
+});
+
+const maxSizeFile = 1024 * 1024 * 10; // 10Mb
+const upload = multer({ storage: storage, limits: { fileSize: maxSizeFile} });
 
 userController.post('/create', (req: Request, res: Response) => {
     const {payload: { role } } = req.body;
@@ -60,6 +83,19 @@ userController.put('/update', (req: Request, res: Response) => {
         res.status(403).send(new RoleError().message);
     }
    
+});
+
+
+userController.put('/update/avatar', upload.single('avatar'),  (req: Request, res: Response) => {
+    
+    const { avatar, login } = req.query;
+
+    if(avatar && login) {
+
+        updateAvatar(avatar.toString(), login.toString())
+        .then(() => res.status(200).send())
+        .catch(() => res.status(400).send());       
+    }
 });
 
 userController.get('/read/users', (req: Request, res: Response) => {

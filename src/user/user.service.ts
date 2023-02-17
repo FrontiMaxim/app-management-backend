@@ -1,4 +1,4 @@
-import { changeUser, deleteUser, getUser, getUsers, getUsersByIdObject, saveUser } from "./user.repository";
+import { changeAvatarByLogin, changeUser, deleteUser, getUser, getUsers, getUsersByIdObject, saveUser } from "./user.repository";
 import bcrypt from 'bcryptjs';
 import { UserDTO } from "./user.dto";
 import { RegistrationError } from "./errors/registration.error";
@@ -71,6 +71,10 @@ export const remove = async(id_user: string): Promise<void> => {
     if(!user) {
         throw new DeleteUserError();
     }
+}
+
+export const updateAvatar = async(avatar: string, login: string): Promise<void> => {
+    await changeAvatarByLogin(avatar, login);
 }
 
 
