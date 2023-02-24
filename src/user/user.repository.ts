@@ -80,7 +80,7 @@ export const changeUser = async (user: UserDTO): Promise<void> => {
 
 
 export const deleteUser = async (id_user: string): Promise<UserDTO> => {
-    return prisma.user.delete({
+    return await prisma.user.delete({
         where: {
             id_user
         }
@@ -89,7 +89,7 @@ export const deleteUser = async (id_user: string): Promise<UserDTO> => {
 
 
 export const getUsersByIdObject = async (id_object: string): Promise<UserDTO[]> => {
-    return prisma.user.findMany({
+    return await prisma.user.findMany({
         where: {
             objects: {
                 some: {

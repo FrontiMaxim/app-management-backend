@@ -82,6 +82,6 @@ model Session {
   date       String
   time_start String
   time_end   String?
-  user       User    @relation(fields: [id_user], references: [id_user])
+  user       User    @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
   id_user    String
 }
