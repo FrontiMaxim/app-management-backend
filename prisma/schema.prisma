@@ -8,17 +8,18 @@ datasource db {
 }
 
 model User {
-  id_user   String    @id @default(uuid())
-  name      String    @db.VarChar(52)
-  login     String    @unique @db.VarChar(14)
-  password  String
-  is_online Boolean   @default(false)
-  avatar    String
-  role      String    @db.VarChar(10)
-  objects   Object[]
-  tasks     Task[]
-  comments  Comment[]
-  sessions  Session[]
+  id_user       String         @id @default(uuid())
+  name          String         @db.VarChar(52)
+  login         String         @unique @db.VarChar(14)
+  password      String
+  is_online     Boolean        @default(false)
+  avatar        String
+  role          String         @db.VarChar(10)
+  objects       Object[]
+  tasks         Task[]
+  comments      Comment[]
+  sessions      Session[]
+  notifications Notification[]
 }
 
 model Object {
@@ -38,18 +39,19 @@ model Object {
 }
 
 model Task {
-  id_task     String     @id @default(uuid())
-  name        String
-  deadline    String
-  description String
-  object      Object     @relation(fields: [id_object], references: [id_object], onDelete: Cascade)
-  id_object   String
-  user        User?      @relation(fields: [id_user], references: [id_user])
-  id_user     String?
-  status      Status     @relation(fields: [id_status], references: [id_status])
-  id_status   Int
-  comments    Comment[]
-  resources   Resource[]
+  id_task       String         @id @default(uuid())
+  name          String
+  deadline      String
+  description   String
+  object        Object         @relation(fields: [id_object], references: [id_object], onDelete: Cascade)
+  id_object     String
+  user          User?          @relation(fields: [id_user], references: [id_user])
+  id_user       String?
+  status        Status         @relation(fields: [id_status], references: [id_status])
+  id_status     Int
+  comments      Comment[]
+  resources     Resource[]
+  notifications Notification[]
 }
 
 model Status {
@@ -84,4 +86,15 @@ model Session {
   time_end   String?
   user       User    @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
   id_user    String
+}
+
+model Notification {
+  id_notification String   @id @default(uuid())
+  is_watch        Boolean
+  data            DateTime
+  type            String
+  user            User     @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
+  id_user         String
+  task            Task     @relation(fields: [id_task], references: [id_task], onDelete: Cascade)
+  id_task         String
 }
