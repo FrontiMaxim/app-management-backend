@@ -1,15 +1,16 @@
-import express, { Express, urlencoded } from 'express';
+import express, { Express } from 'express';
 import { json } from 'body-parser';
 import { config } from 'dotenv';
-import userController from './user/user.controller';
+import userController from './user/controllers/user.controller';
 import { authorisation } from './middleware/authorisation';
-import loginController from './login/login.controller';
-import sessionController from './session/session.controller';
+import loginController from './login/controllers/login.controller';
+import sessionController from './session/controllers/session.controller';
 import path from 'path';
-import objectController from './object/object.controller';
-import taskController from './task/task.controller';
-import resourceController from './resource/resource.controller';
-import commentController from './comment/comment.controller';
+import objectController from './object/controllers/object.controller';
+import taskController from './task/controllers/task.controller';
+import resourceController from './resource/controllers/resource.controller';
+import commentController from './comment/controllers/comment.controller';
+import notificationController from './notification/controllers/notification.controller';
 
 config();
 
@@ -23,6 +24,7 @@ const OBJECT_PATH = '/object';
 const TASK_PATH = '/task';
 const RESOURCE_PATH = '/resource';
 const COMMENT_PATH = '/comment';
+const NOTIFICATION_PATH = '/notification';
 
 app.use(json());
 
@@ -44,6 +46,8 @@ app.use(TASK_PATH, taskController);
 app.use(RESOURCE_PATH, resourceController);
 
 app.use(COMMENT_PATH, commentController);
+
+app.use(NOTIFICATION_PATH, notificationController);
 
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порте: ${PORT}`);
