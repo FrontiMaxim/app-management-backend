@@ -1,8 +1,8 @@
 import { CommentDTO } from "../../comment/models/comment.dto";
 import { ObjectDTO } from "../../object/models/object.dto";
 import { ResourceDTO } from "../../resource/models/resource.dto";
-import { StatusDTO } from "../../status/status.dto";
 import { UserDTO } from "../../user/models/user.dto";
+import { StatusDTO } from "./status.dto";
 
 export class TaskDTO {
     id_task: string;

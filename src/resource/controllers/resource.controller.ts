@@ -11,7 +11,7 @@ const resourceController = Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../',  'public', 'resources'))
+        cb(null, path.join(__dirname, '../../',  'public', 'resources'))
     },
 
     filename: function (req, file, cb) {

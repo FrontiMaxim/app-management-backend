@@ -1,19 +1,18 @@
 import { Router } from "express";
 import { Request, Response } from "express";
 import { checkRole } from "../../helpers/checkRole";
-import { createNotification, readNotifications } from "../services/notification.service";
-import { changeNotification } from "../repositories/notification.repository";
+import { createNotification, readNotifications, updateNotification } from "../services/notification.service";
 
 const notificationController = Router();
 
 notificationController.post('/create', (req: Request, res: Response) => {
-    const {payload: { role, login } } = req.body;
+    const {payload: { role } } = req.body;
 
-    checkRole(['DESIGNER', 'CLIETN'], role, res);
+    checkRole(['DESIGNER', 'CLIENT', 'ADMIN'], role, res);
 
     delete req.body.payload;
 
-    createNotification(req.body, login)
+    createNotification(req.body)
         .then(() => res.status(201).send());
     
 });
@@ -35,14 +34,14 @@ notificationController.put('/update', (req: Request, res: Response) => {
 
     const {payload: { role } } = req.body;
     
-    const id_notifiction = req.query.id_notifiction;
+    const id_task = req.query.id_task;
 
-    checkRole(['DESIGNER', 'CLIETN'], role, res)
+    checkRole(['DESIGNER', 'CLIENT', 'ADMIN'], role, res)
 
     delete req.body.payload;
 
-    if(id_notifiction) {
-        changeNotification(id_notifiction.toString())
+    if(id_task) {
+        updateNotification(id_task.toString())
             .then(() => res.status(200).send());
     }    
 });

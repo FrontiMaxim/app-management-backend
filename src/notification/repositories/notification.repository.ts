@@ -8,6 +8,34 @@ export const getAllNotificationByLoginUser = async (login: string): Promise<Noti
         where: {
             user: {
                 login
+            },
+            is_watch: false
+        },
+        include: {
+            task: {
+                include: {
+                    status: true,
+                }
+            }
+        },
+        orderBy: {
+            data: 'desc'
+        }
+    });
+};
+
+
+export const getAllNotificationByIdTask = async (id_task: string): Promise<NotificationWithoutUserDTO[]> => {
+    return await prisma.notification.findMany({
+        where: {
+            id_task,
+            is_watch: false
+        },
+        include: {
+            task: {
+                include: {
+                    status: true,
+                }
             }
         }
     });

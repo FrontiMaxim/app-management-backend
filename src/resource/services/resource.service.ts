@@ -6,7 +6,7 @@ import fs from 'fs/promises';
 import { getTaskById, updateTask } from "../../task/repositories/task.repository";
 
 
-const PATH = path.join(__dirname, '../',  'public', 'resources');
+const PATH = path.join(__dirname, '../../',  'public', 'resources');
 
 export const createResource = async (originalName: string, storageName: string, id_task: string): Promise<void> => {
     try {
