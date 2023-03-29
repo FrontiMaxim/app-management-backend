@@ -30,7 +30,6 @@ model Object {
   apartment  Int?
   note       String
   data_start String
-  client     String
   users      User[]
   tasks      Task[]
 
