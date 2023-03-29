@@ -39,6 +39,9 @@ export const saveUser = async (user: UserDTO): Promise<void> => {
             },
             comments: {
                 connect: []
+            }, 
+            resources: {
+                connect: []
             }
         }
     });

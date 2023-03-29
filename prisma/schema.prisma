@@ -20,6 +20,7 @@ model User {
   comments      Comment[]
   sessions      Session[]
   notifications Notification[]
+  resources     Resource[]
 }
 
 model Object {
@@ -76,6 +77,9 @@ model Resource {
   storageName  String
   task         Task   @relation(fields: [id_task], references: [id_task], onDelete: Cascade)
   id_task      String
+  user         User   @relation(fields: [id_user], references: [id_user])
+  id_user      String
+  date         DateTime
 }
 
 model Session {

@@ -1,5 +1,6 @@
 import { CommentDTO } from "../../comment/models/comment.dto";
 import { ObjectDTO } from "../../object/models/object.dto";
+import { ResourceDTO } from "../../resource/models/resource.dto";
 import { SessionDTO } from "../../session/models/session.dto";
 import { TaskDTO } from "../../task/models/task.dto";
 
@@ -15,4 +16,5 @@ export class UserDTO {
     objects?: ObjectDTO[];
     tasks?: TaskDTO[];
     comments?: CommentDTO[]; 
+    resources?: ResourceDTO[];
 }

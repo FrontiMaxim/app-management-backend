@@ -26,17 +26,17 @@ const storage = multer.diskStorage({
     },    
 })
   
-const maxSizeFile = 1024 * 1024 * 40; // 40Mb
+const maxSizeFile = 1024 * 1024 * 100; // 100Mb
 const upload = multer({ storage: storage, limits: { fileSize: maxSizeFile} });
 
 
 resourceController.post('/create', upload.single('resources'), (req: Request, res: Response) => {
 
-    const { storageName, originalName, id_task } = req.query;
+    const { storageName, originalName, id_task, id_user } = req.query;
 
-    if(storageName && originalName && id_task) {
+    if(storageName && originalName && id_task && id_user) {
 
-        createResource(originalName.toString(), storageName.toString(), id_task.toString())
+        createResource(originalName.toString(), storageName.toString(), id_task.toString(), id_user.toString())
         .then(() => res.status(200).send())
         .catch((e)=>   res.status(400).send());       
     }
@@ -57,7 +57,7 @@ resourceController.delete('/delete', (req: Request, res: Response) => {
 
     const {payload: { role } } = req.body;
     
-    checkRole(['DESIGNER'], role, res);
+    checkRole(['DESIGNER', 'CLIENT', 'ADMIN'], role, res);
 
     const { id_resource } = req.query;
 

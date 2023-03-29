@@ -4,13 +4,14 @@ import { deleteResource, getResourcesByIdTask, saveResource } from "../repositor
 import path from 'path';
 import fs from 'fs/promises';
 import { getTaskById, updateTask } from "../../task/repositories/task.repository";
+import { ResourceWithDateAndUserDTO } from "../repositories/resourceWithDateAndUser";
 
 
 const PATH = path.join(__dirname, '../../',  'public', 'resources');
 
-export const createResource = async (originalName: string, storageName: string, id_task: string): Promise<void> => {
+export const createResource = async (originalName: string, storageName: string, id_task: string, id_user: string): Promise<void> => {
     try {
-        await saveResource(originalName, storageName, id_task);
+        await saveResource(originalName, storageName, id_task, id_user);
         
         const task = await getTaskById(id_task);
 
@@ -25,7 +26,7 @@ export const createResource = async (originalName: string, storageName: string, 
     }
 }
 
-export const readResources = async (id_task: string): Promise<ResourceDTO[]> => {
+export const readResources = async (id_task: string): Promise<ResourceWithDateAndUserDTO[]> => {
     const resources = await getResourcesByIdTask(id_task);
 
     if(resources) {
