@@ -104,9 +104,6 @@ export const changeObject = async (object: ObjectDTO): Promise<void> => {
             note: {
                 set: object.note
             },
-            client: {
-                set: object.client
-            },
             data_start: {
                 set: object.data_start
             },

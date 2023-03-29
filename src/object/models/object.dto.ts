@@ -9,7 +9,6 @@ export class ObjectDTO {
     apartment: number | null;
     note: string;
     data_start: string;
-    client: string;
     users?: UserDTO[];
     tasks?: TaskDTO[];
 }

@@ -39,7 +39,7 @@ taskController.put('/update', (req: Request, res: Response) => {
     
     const {payload: { role } } = req.body;
 
-    checkRole(['ADMIN'], role, res);
+    checkRole(['ADMIN', 'CLIETN'], role, res);
 
     changeTask(req.body)
     .then((changedTask) => res.status(200).send(changedTask))

@@ -26,16 +26,13 @@ export const readNotifications = async (login: string): Promise<NotificationWith
 }
 
 
-export const updateNotification = async (id_task: string): Promise<void> => {
+export const updateNotification = async (id_task: string, id_user: string): Promise<void> => {
 
-    console.log(id_task)
-
-    const notifications = await getAllNotificationByIdTask(id_task);
+    const notifications = await getAllNotificationByIdTask(id_task, id_user);
 
     if(notifications) {
         for(let notification of notifications) {
             await changeNotification(notification.id_notification);
         }
     }
-    
 }

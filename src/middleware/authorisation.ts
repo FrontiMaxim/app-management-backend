@@ -5,9 +5,9 @@ import { AthoristaionError } from '../errors/authorisation.error';
 
 export const authorisation = (req: Request, res: Response, next: NextFunction) => {
     const authorisation = req.headers.authorization;
-
+    
     if(authorisation) {
-        const token = authorisation?.split(' ')[1];
+        const token = authorisation.split(' ')[1];
 
         try {
             const payload = jwt.verify(token, process.env.SECRET!);

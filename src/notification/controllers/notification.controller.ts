@@ -35,13 +35,14 @@ notificationController.put('/update', (req: Request, res: Response) => {
     const {payload: { role } } = req.body;
     
     const id_task = req.query.id_task;
+    const id_user = req.query.id_user;
 
     checkRole(['DESIGNER', 'CLIENT', 'ADMIN'], role, res)
 
     delete req.body.payload;
 
-    if(id_task) {
-        updateNotification(id_task.toString())
+    if(id_task && id_user) {
+        updateNotification(id_task.toString(), id_user.toString())
             .then(() => res.status(200).send());
     }    
 });
